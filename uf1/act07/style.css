@@ -1,0 +1,23 @@
+.log{
+    background-color: #fff;
+    height: 50%;
+    width: 50%;
+}
+body{
+  // background-color: black;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.log>form{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10%;
+}

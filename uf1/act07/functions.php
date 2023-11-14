@@ -1,58 +1,98 @@
 <?php
-function loggin($k,$v){
-    $users = new stdClass();
-    $a = $_POST["user"];
-    $b = $_POST["psswd"];
-    $d =  md5($b);
-    $users->$a =$b;
-    //fopen("./data/users.txt","x+");
 
-    if ($a !="" || $b !="" ){
-        //file_put_contents("./data/users.txt",json_encode($users));
-        $file = file_get_contents("./data/users.txt");
-        $data = json_decode($file);
-        foreach ($data as $k => $v){
-            if($a == $k){
-                if ($d != $v){
-                    echo "error";
+$logged = false;
 
-                }
-                else{
-                    echo "nice";
-                    $logged = logg_check();
-                    $url = "http://localhost:63342/m7/uf1/act07/act07.php";
-                    header("Location: $url");
-
-                }
+get_post();
+function get_post(){
+    foreach ($_POST as $k => $v){
+        if (is_array($k))
+        {
+            foreach ($k as $kk => $vv){
+                filter($kk,$vv);
             }
+        }else {
+        filter($k,$v);
         }
     }
-    else{
-        /*$file = file_get_contents("./data/users.txt");
-        $jesi = json_decode($file);
-        foreach ($jesi as $k => $v) {
-                echo $k , $v;
-        }*/
-        unset($_POST);
-
-    }
-}
-function logg_check(){
-        return true;
 }
 function filter($k,$v){
     switch ($k){
         case "loggin":
-            loggin($k,$v);
+            loggin();
             break;
-        }
-}
-function get_post(){
-    if ($_POST != "") {
-        foreach ($_POST as $k => $v) {
-            filter($k, $v);
-        }
+        case "cp":
+            echo "ss";
+            show_option();
+            break;
+        case "f_selected":
+            echo $v;
+            break;
     }
 }
 
-get_post();
+function show_option(){
+echo "ss";
+}
+function loggin(){
+    $a = $_POST["user"];
+    $b =  $_POST["psswd"];
+    check_user($a,$b);
+}
+
+function check_user($a,$b){
+  /*  $users = new stdClass();
+    $c = md5($b);
+    $users->$a = $c;
+    file_put_contents("./data/users.txt",json_encode($users));
+  */
+    $c = md5($b);
+
+    $file = file_get_contents("./data/users.txt");
+    $data = json_decode($file);
+    foreach ($data as $k => $v){
+        if ($k == $a && $v == $c){
+
+            $GLOBALS['logged'] = true;
+            header('location: act07.php');
+            break;
+        }
+        else{
+            $GLOBALS['logged'] = false;
+            echo "error";
+
+        }
+    }
+
+}
+function check_logged(){
+    $a = $GLOBALS['logged'];
+    if ($a){
+        header('location: loggin.php');
+        exit();
+    }
+}
+
+function check_free_space(){
+    echo disk_free_space("/")/1024000 . " GB" ;
+
+}
+function check_total_space(){
+    echo disk_total_space("/")/1024000 . "GB";
+}
+function get_abs_path(){
+    echo getcwd();
+
+}
+
+function  show_dirs(){
+    $dir = scandir(getcwd(),0);
+    foreach ($dir as $k => $v) {
+        if ($k >1) {
+            echo "
+         <input type='radio' name='f_selected' value='$v' id='f_$k'>
+         <label for='f_$k'>$v</label>
+         
+    ";}
+    }
+}
+

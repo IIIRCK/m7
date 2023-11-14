@@ -1,38 +1,31 @@
 <?php
 include ("./functions.php");
-echo "<h1>EX1</h1>";
-
-echo "<h2>a</h2>";
-$v = 1.2;
-echo disk_free_space("/")/1024000 . " GB" ;
-
-echo "<h2>b</h2>";
-
-echo disk_total_space("/")/1024000 . "GB";
-
-echo "<h2>c</h2>";
-
-echo getcwd();
-
-echo "<h1>EX2</h1>";
-echo "<h2>a</h2>";
-$dir = scandir(getcwd(),0);
+check_logged();
 
 
 
-foreach ($dir as $k => $v) {
-    echo $v;
-    echo "<br>";
-}
+echo "<h2>Espacio libre</h2>";
+check_free_space();
+echo "<h2>Espacio total</h2>";
+check_total_space();
+echo "<h2>Ruta actual</h2>";
+get_abs_path();
+
+echo "<h2>Directorio</h2>";
+
+echo "<form method='post'>";
+     show_dirs();
+echo "<input type='submit' name='enter' value='enter'>";
+echo "<input type='submit' name='cp' value='copy'>";
+echo "<input type='text'  name='cp_path' placeholder='copy path'>";
+echo "<input type='submit' name='rm' value='remove'>";
+echo "</form>";
 
 ?>
-<?php
-function e2b(){
-
-}
 
 
-//loggin
+
+<!--//loggin
     //restringir acceso solo ha usuarios dentro del json
     //psswd encriptado con md5
 
@@ -44,7 +37,7 @@ function e2b(){
         //editar archivos txt
         //copiar a una ruta concrata solo carpetas dentro del data
         //crear carpetas
-
+-->
 
 
 

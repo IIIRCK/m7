@@ -13,13 +13,12 @@ include ("./functions.php");
 <body>
   <div class="log" >
      <form action="" method="post">
-        <input type="text" name="user" placeholder="users">
-        <input type="password" name="psswd" placeholder="password">
+        <input type="text" name="user" placeholder="users" value="user1">
+        <input type="password" name="psswd" placeholder="password" value="user1">
         <input type="submit" name="loggin" value="Loggin">
                
        </form>
      </div>   
 </body>
-</html>'
-
+</html>';
 ?>

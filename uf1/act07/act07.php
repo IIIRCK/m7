@@ -1,5 +1,6 @@
 <?php
 include ("./functions.php");
+
 check_logged();
 
 
@@ -16,9 +17,15 @@ echo "<h2>Directorio</h2>";
 echo "<form method='post'>";
      show_dirs();
 echo "<input type='submit' name='enter' value='enter'>";
+echo "<input type='submit' name='return' value='return'>";
 echo "<input type='submit' name='cp' value='copy'>";
-echo "<input type='text'  name='cp_path' placeholder='copy path'>";
+echo "<input type='text'  name='cp_path' placeholder='copy path/filename'>";
 echo "<input type='submit' name='rm' value='remove'>";
+echo "<input type='submit' name='edit' value='edit'>";
+echo "<input type='submit' name='mkdir' value='mkdir'>";
+echo "<input type='submit' name='unlink' value='delfile'>";
+echo "<input type='submit' name='rmdir' value='rmdir'>";
+
 echo "</form>";
 
 ?>

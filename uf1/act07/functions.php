@@ -20,12 +20,65 @@ function filter($k,$v){
         case "loggin":
             loggin();
             break;
-        case "cp":
-            echo "ss";
-            show_option();
-            break;
         case "f_selected":
-            echo $v;
+           // echo $v;
+            break;
+        case "enter":
+            $a= chdir('./'.$_POST["f_selected"]);
+            if ($a){
+                echo "done";
+            }
+            else{
+                echo "no es un directorio";
+            }
+            break;
+        case "return":
+            chdir('.');
+            break;
+        case "edit":
+            echo "edit";
+            load_txt();
+            break;
+        case "rm":
+            echo "remove";
+            break;
+        case 'save':
+            $a = $_POST['textarea'];
+            file_put_contents('./data/users.txt',$a);
+            break;
+        case 'cp':
+            $a = $_POST['f_selected'];
+            $b = $_POST['cp_path'];
+            $s =  './'.$a;
+            $d = $b.'/'.basename($a);
+            if (copy($s,$d)){
+                echo 'nice';
+            }
+            else{
+                echo 'fuk';
+            }
+            echo $s."1";
+            echo $d."2";
+            break;
+        case 'mkdir':
+            $a= getcwd();
+            $b = $_POST['cp_path'];
+            $c= $a.'/'.$b;
+            if (mkdir($c)){
+                echo "nice";
+            }else{
+                echo 'fuk';
+            }
+            break;
+        case 'rmdir':
+            $a = $_POST['f_selected'];
+            $b = './'.$a;
+            rmdir($a);
+            break;
+        case 'unlink':
+            $a = $_POST['f_selected'];
+            $b = './'.$a;
+            unlink($a);
             break;
     }
 }
@@ -58,18 +111,46 @@ function check_user($a,$b){
         }
         else{
             $GLOBALS['logged'] = false;
-            echo "error";
-
+            if ($GLOBALS['logged']) {
+                echo "error";
+            }else{
+                echo "aawa";
+            }
+            break;
         }
     }
 
 }
+function load_txt(){
+    if($_POST['f_selected'] === "users.txt") {
+        chdir('./data');
+
+        $a = $_POST['f_selected'];
+        $b = './' . $a;
+        if (file_exists($b)) {
+
+                $data = file_get_contents($b);
+                echo "<form method='post'>";
+
+                echo "<textarea name='textarea' style='resize: none;width: 200px;height: 100px;' >$data</textarea>";
+                echo "<input type='submit' name='save' value='save'>";
+                echo "</form>";
+
+        }else{
+        echo "1";
+    }
+
+    }else{
+
+    }
+}
+
 function check_logged(){
     $a = $GLOBALS['logged'];
     if ($a){
         header('location: loggin.php');
-        exit();
     }
+
 }
 
 function check_free_space(){

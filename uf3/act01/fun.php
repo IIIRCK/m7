@@ -1,13 +1,10 @@
 <?php
-
-
 function filter_post($k,$v){
 
     switch ($k){
         case 'ok':
             insert_form();
             break;
-
     }
 }
 
@@ -16,7 +13,6 @@ function insert_form() {
     $b = $_POST['surname'];
     $c = $_POST['email'];
     $d = $_POST['telf'];
-
 
     insert($a,$b,$c,$d);
 }

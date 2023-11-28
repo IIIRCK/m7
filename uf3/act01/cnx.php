@@ -12,7 +12,6 @@ function connect(){
     if(mysqli_connect_errno()){
         echo " error".mysqli_connect_error();
         exit();
-
     }
     return $cnx;
 }
@@ -40,7 +39,6 @@ function delete($t,$id){
     }else{
         echo 'error'.mysqli_error($cnx);
     }
-
 
     mysqli_close($cnx);
 }

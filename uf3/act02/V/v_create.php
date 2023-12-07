@@ -1,9 +1,13 @@
 
 <?php
-include ('./cnx.php');
-include ('./fun.php');
+include('../C/c.php');
+include('../M/m.php');
+//include('../V/v_style.css')
+echo '<link rel="stylesheet" href="../V/v_style.css">
+'
 ?>
-<form method="post">
+<body>
+<form method="post" >
     <label for="name">name</>
     <input type="text" name="name">
     <label for="surname">surname</>
@@ -14,7 +18,11 @@ include ('./fun.php');
     <input type="text" name="telf">
     <input type="submit" name="ok" >
 </form>
-<br>
-<?php
-select('persona');
-?>
+
+
+<div class="select">
+    <?php
+    select('persona');
+    ?>
+</div>
+</body>

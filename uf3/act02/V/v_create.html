@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="v_style.css">
+</head>
+<body>
+
+<form method="post" >
+    <label for="name">name</label>
+    <input type="text" name="name" id="name">
+    <label for="surname">surname</label>
+    <input type="text" name="surname"id="surname">
+    <label for="email">email</label>
+    <input type="text" name="email" id="email">
+    <label for="telf">telf</label>
+    <input type="text" name="telf" id="telf">
+    <input type="submit" name="ok" >
+</form>
+
+
+<div class="select">
+    <?php
+    select('persona');
+    ?>
+</div>
+
+<script src="../M/m.php"></script>
+<script language="php"></script>
+</body>
+</html>

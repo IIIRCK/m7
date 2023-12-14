@@ -9,15 +9,15 @@ body{
     align-items: center;
 }
 body{
-    background-color: green;
+   // background-color: green;
     height: 100vh;
     width: 100vw;
 }
 form{
-    background-color: red;
-    border: 1px solid black;
+    //background-color: red;
+    //border: 1px solid black;
     height: 50%;
-    width: 50%;
+    width: 25%;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -22,13 +22,9 @@ function select($t)
     $sql = "select * from $t";
     $res = mysqli_query($cnx, $sql);
 
-    while ($f = mysqli_fetch_assoc($res)){
+   $r = mysqli_fetch_assoc($res);
 
-        foreach ($f as $k => $v){
-            echo $k . ': ' . $v;
-            echo '<br>';
-        }
-    }
+    return $r;
     mysqli_close($cnx);
 }
 function delete($t,$id){

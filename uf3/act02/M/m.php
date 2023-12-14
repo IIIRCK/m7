@@ -1,7 +1,5 @@
 <?php
 
-//phpinfo();
-
 function connect(){
     $srv = "localhost";
     $usr = "root";
@@ -22,10 +20,34 @@ function select($t)
     $sql = "select * from $t";
     $res = mysqli_query($cnx, $sql);
 
-   $r = mysqli_fetch_assoc($res);
+    while ($f = mysqli_fetch_assoc($res)){
 
-    return $r;
+        foreach ($f as $k => $v){
+            echo $k . ': ' . $v;
+            if ($k == 'file')
+            {
+                echo '<img src="data:' . 'image/png' . ';base64,' . base64_encode($v) . '">';
+            }
+            echo '<br>';
+        }
+    }
+
     mysqli_close($cnx);
+}
+function next_id(){
+    $cnx = connect();
+    $sql = "select max(id)AS max_id  from persona";
+    $res = mysqli_query($cnx, $sql);
+    if ($res) {
+        $row = mysqli_fetch_assoc($res);
+        $next_id = $row['max_id'] ? $row['max_id'] + 1 : 1;
+        mysqli_close($cnx);
+        return $next_id;
+    } else {
+        echo "Error: " . mysqli_error($cnx);
+    }
+    mysqli_close($cnx);
+    return false;
 }
 function delete($t,$id){
     $cnx = connect();
@@ -38,10 +60,10 @@ function delete($t,$id){
 
     mysqli_close($cnx);
 }
-function insert($n,$nn,$e,$tlf){
+function insert($n,$nn,$e,$tlf,$f,$fp){
     $cnx = connect();
-
-    $sql = "INSERT INTO persona(name, surname, email, telf)  VALUES('$n','$nn','$e','$tlf');";
+    $fs = mysqli_real_escape_string($cnx, $f);
+    $sql = "insert into persona (name, surname, email, telf, file, file_path) values ('$n','$nn','$e','$tlf','$fs','$fp');";
 
     mysqli_query($cnx,$sql);
 

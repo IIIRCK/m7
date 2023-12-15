@@ -1,15 +1,19 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 
-<?php
-include_once ('../C/c.php');
-include_once ('../M/m.php');
-//include('../V/v_style.css')
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
 </head>
-<form method="post"  enctype="multipart/form-data" >
+<form action="../c.php" method="post"  enctype="multipart/form-data" >
     <label for="name">name</>
     <input type="text" name="name">
     <label for="surname">surname</>
@@ -20,12 +24,11 @@ include_once ('../M/m.php');
     <input type="text" name="telf">
     <label for="img"></label>
     <input type="file" name="img">
-    <input type="submit" name="ok" >
+    <input type="submit" name="ok_c" >
+    <a href="v_read.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> view table</a>
+
 </form>
-<div class="select">
-    <?php
-    select('persona');
 
-    ?>
-</div>
 
+</body>
+</html>

@@ -8,5 +8,5 @@
     <input type="text" name="email">
     <label for="telf">telf</>
     <input type="text" name="telf">
-    <input type="submit" name="ok" >
+    <input type="submit" name="ok_m" >
 </form>

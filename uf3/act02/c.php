@@ -1,11 +1,13 @@
 <?php
- require_once '../M/m.php';
+ require_once 'm.php';
+
 function filter_post($k,$v){
 
     switch ($k){
-        case 'ok':
+        case 'ok_c':
             insert_user();
             break;
+
     }
 }
 

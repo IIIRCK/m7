@@ -22,6 +22,6 @@ try {
     <input type="text" placeholder="name" name="name">
     <input type="text" placeholder="surname" name="surname">
     <input type="file" name="img">
-    <button type="submit">ok</button>
+    <button type="submit" name="ok00">ok</button>
 </form>
 

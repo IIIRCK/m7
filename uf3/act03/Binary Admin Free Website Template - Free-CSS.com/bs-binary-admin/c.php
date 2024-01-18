@@ -6,6 +6,7 @@ function filter_post($k,$v){
     switch ($k){
         case 'ok_c':
             insert_user();
+            echo 'sss';
             break;
 
     }
@@ -17,18 +18,19 @@ function insert_user()
     $b = $_POST['surname'];
     $c = $_POST['email'];
     $d = $_POST['telf'];
-    if (isset($_FILES['img'])){
-        $path = './img';
-        $uploadFile = $path  . basename($_FILES['file']['name']);
-        $fileType = isset($_FILES['img']['type']) ? $_FILES['img']['type'] : null;
-        $fileData = file_get_contents($_FILES['img']['tmp_name']);
-        if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadFile)) {
-            echo "File is valid, and was successfully uploaded.";
-        } else {
-            echo "File upload failed!";
-        }
+    $e = $_POST['img'];
+    $f = $_FILES['img'][$e];
+    $g = './img/';
+    $h = next_id().'png';
+    $i = $g.$h;
+    $j = $_FILES['img']['type'];
+    if(move_uploaded_file($f,$i))
+    {
+        echo  'nice';
+    }else{
+        echo 'bad';
     }
-    insert($a,$b,$c,$d,$fileData,$fileType);
+    insert($a,$b,$c,$d,$f,$j);
 }
 function _post(){
     foreach ($_POST as $k => $v ){

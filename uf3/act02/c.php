@@ -17,6 +17,9 @@ function insert_user()
     $b = $_POST['surname'];
     $c = $_POST['email'];
     $d = $_POST['telf'];
+    $e = $_POST['img'];
+    $f = $_FILES['img'][$e];
+    $g = './'
     if (isset($_FILES['img'])){
         $path = './img';
         $uploadFile = $path  . basename($_FILES['file']['name']);

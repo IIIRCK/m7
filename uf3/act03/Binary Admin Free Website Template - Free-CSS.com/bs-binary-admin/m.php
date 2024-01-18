@@ -27,11 +27,22 @@ function select()
     }
     $data = $rowdata;
     }
-
     mysqli_close($cnx);
-    return json_decode($data);
+    return json_encode($data);
 }
-function next_id(){
+function select_id($id)
+{
+    $cnx = connect();
+    $sql = "select * from persona where id = $id";
+    $res = mysqli_query($cnx, $sql);
+    $data = array();
+    $f = mysqli_fetch_assoc($res);
+    mysqli_close($cnx);
+    return $f;
+
+}
+function next_id()
+{
     $cnx = connect();
     $sql = "select max(id)AS max_id  from persona";
     $res = mysqli_query($cnx, $sql);

@@ -18,9 +18,8 @@ class cnx extends \mysqli
         {
             try {
                 $cnx = new cnx();
-                $cnx = new cnx();
                 $sql = "select * from $a";
-                $r = mysqli_query($cnx,$sql);
+                $r = $cnx->query($sql);
                 if ($r ){
                     $d = $r->fetch_all(MYSQLI_ASSOC);
                     return $d;
@@ -29,10 +28,29 @@ class cnx extends \mysqli
                 }
             }catch (Exception $e){
                 echo 'Error: ' . $e->getMessage();
-                return false;
             } finally {
                 $cnx->close();
             }
+        }
+
+        public  function insert($a,$b,$d)
+        {
+            try {
+                $cnx = new cnx();
+                $sql = "insert into test01 ('name','surname','img')values (?,?,?)";
+                $stm = $cnx->prepare($sql);
+                $stm->bind_param('sss',$a,$b,$d);
+                if ($stm->execute()){
+                    throw new Exception ('Insert sql'.$cnx->error);
+                }
+                $stm->close();
+            }catch (Exception $e){
+                echo 'Error: ' . $e->getMessage();
+
+            } finally {
+                $cnx->close();
+            }
+
         }
 
 

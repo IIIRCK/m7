@@ -34,12 +34,12 @@
                 </div>
                 <?php
                 // Include config file
-                require_once "../c.php";
-                require_once "../m.php";
+                require_once "c.php";
+                require_once "m.php";
 
                 $cnx = connect();
                 // Attempt select query execution
-                $sql = "SELECT * FROM persona";
+                $sql = "SELECT * FROM test";
                 if($result = mysqli_query($cnx, $sql)){
                     if(mysqli_num_rows($result) > 0){
                         echo '<table class="table table-bordered table-striped">';
@@ -50,7 +50,6 @@
                         echo "<th>surname</th>";
                         echo "<th>email</th>";
                         echo "<th>tlf</th>";
-                        echo "<th>file_type</th>";
                         echo "<th>Action</th>";
                         echo "</tr>";
                         echo "</thead>";
@@ -62,10 +61,13 @@
                             echo "<td>" . $row['surname'] . "</td>";
                             echo "<td>" . $row['email'] . "</td>";
                             echo "<td>" . $row['tlf'] . "</td>";
-                            echo "<td>" . $row['file_path'] . "</td>";
                             echo "<td>";
-                            echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                            echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                            echo '<a href="v_update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                            ?>
+                            <button type="button" class="btn btn-primary btn_d" data-toggle="modal" data-target="#exampleModalCenter"  value="<?php echo $row['id'] ?>">
+                                <span class="fa fa-trash">
+                            </button>
+                            <?php
                             echo '<a href="v_delete?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                             echo "</td>";
                             echo "</tr>";
@@ -80,12 +82,50 @@
                 } else{
                     echo "Oops! Something went wrong. Please try again later.";
                 }
-
+                ini_set('display_errors', 1);
+                error_reporting(E_ALL);
                 mysqli_close($cnx);
                 ?>
+
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Quieres borrarlo?
+                            </div>
+                            <form  role="form" method="post" enctype="multipart/form-data" action="v_read.php">
+                            <div class="modal-footer form-group"  >
+                                <label>
+                                    <input type="text" name="id"  value="">
+                                </label>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary"   name="ok_d">Delete</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.querySelectorAll('.btn_d').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log(this.value);
+            document.querySelector('input[name="id"]').value = this.value
+        });
+    });
+
+</script>
 </body>
 </html>

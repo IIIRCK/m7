@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 function connect(){
     $srv = "localhost";
@@ -14,10 +14,10 @@ function connect(){
     return $cnx;
 }
 
-function select()
+function select($id)
 {
     $cnx = connect();
-    $sql = "select * from persona";
+    $sql = "select * from test where id = $id";
     $res = mysqli_query($cnx, $sql);
     $data = array();
     while ($f = mysqli_fetch_assoc($res)){
@@ -27,9 +27,8 @@ function select()
         }
         $data = $rowdata;
     }
-
     mysqli_close($cnx);
-    return json_decode($data);
+    return json_encode($data);
 }
 function next_id(){
     $cnx = connect();
@@ -48,14 +47,10 @@ function next_id(){
 }
 function delete($id){
     $cnx = connect();
-    $sql = "delete from persona where codi = $id";
+    $sql = "delete from test where id = $id";
     mysqli_query($cnx, $sql);
-    if (!mysqli_error($cnx)){
-        mysqli_close($cnx);
-        return true;
-    }
     mysqli_close($cnx);
-    return false;
+
 }
 function insert($n,$nn,$e,$tlf,$f,$fp){
     $cnx = connect();
@@ -69,6 +64,22 @@ function insert($n,$nn,$e,$tlf,$f,$fp){
     mysqli_close($cnx);
     return false;
 }
+ function insertest($n,$nn,$e,$tlf){
+     $cnx = connect();
+     $sql = "insert into test (name, surname, email, tlf) values ('$n','$nn','$e','$tlf');";
+     mysqli_query($cnx,$sql);
+     mysqli_close($cnx);
+ }
+ function updatest($id,$n,$s,$e,$t){
+     $cnx = connect();
+    $sql = "
+    update test 
+    set name = '$n',surname = '$s',email ='$e',tlf ='$t'   
+    where id = $id;
+     ";
+     mysqli_query($cnx,$sql);
+     mysqli_close($cnx);
+ }
 function update($c,$d,$id)
 {
     $cnx = connect();

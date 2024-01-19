@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/uf3/act04/shareposts/db/shareposts.sql" dialect="MySQL" />
+  </component>
+</project>
